@@ -32,7 +32,7 @@ bun run deploy
 - `bun run dev`：本地预览 `dist/`
 - `bun run deploy`：依次执行 build、check、`wrangler deploy`
 
-构建需要 Bun 与 Python 3.12（仅构建期，用于生成/校验 GB18030 LRC）；Python 版本由仓库根目录 `.python-version` 声明，wrangler 作为 devDependency 锁定在 v4（npm 上尚无 v5）。
+构建需要 Bun 与 Python 3.12（仅构建期，用于生成/校验 GB18030 LRC）；Python 与 Bun 版本均通过运行环境/部署环境变量指定，不再使用 `.python-version` 等文件锁定，wrangler 作为 devDependency 锁定在 v4（npm 上尚无 v5）。
 
 部署前需确保已登录 Cloudflare：
 

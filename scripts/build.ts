@@ -154,6 +154,20 @@ async function build() {
   await mkdir(distRoot, { recursive: true });
   await cp(siteRoot, distRoot, { recursive: true });
 
+  const gitSha = await (async () => {
+    const git = Bun.spawn(["git", "rev-parse", "--short", "HEAD"], { stdout: "pipe", stderr: "ignore" });
+    const [exitCode, stdout] = await Promise.all([git.exited, new Response(git.stdout).text()]);
+    return exitCode === 0 ? stdout.trim() : "unknown";
+  })();
+  for (const file of ["index.html", "404.html"]) {
+    const path = join(distRoot, file);
+    const htmlFile = Bun.file(path);
+    if (await htmlFile.exists()) {
+      const html = await htmlFile.text();
+      await Bun.write(path, html.replace(/<!--\s*SITE_VERSION\s*-->/g, gitSha));
+    }
+  }
+
   const albums: Album[] = [];
   const gb18030Pairs: string[] = [];
   let totalTracks = 0;

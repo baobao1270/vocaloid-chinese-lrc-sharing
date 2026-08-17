@@ -124,6 +124,7 @@ main, .site-footer { width: min(1180px, calc(100% - 2.5rem)); margin: 0 auto; }
 }
 .site-footer p { max-width: 58rem; margin: 0; }
 .site-footer p + p { margin-top: .45rem; }
+.site-version { margin-top: .7rem; font-size: .75rem; }
 .site-footer a { color: var(--blue-dark); font-weight: 750; text-decoration-thickness: .08em; text-underline-offset: .18em; }
 
 .hero { padding: clamp(4rem, 9vw, 7.5rem) 0 4rem; }
