@@ -6,12 +6,13 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260817.1",
     "@types/bun": "^1.3.14",
-    "sharp": "^0.35.3"
+    "sharp": "^0.35.3",
+    "wrangler": "^4"
   },
   "scripts": {
     "build": "bun run scripts/build.ts",
     "check": "bun run scripts/check.ts",
     "dev": "bun --hot scripts/serve.ts",
-    "deploy": "bun run build && bun run check && bunx wrangler@5 deploy"
+    "deploy": "bun run build && bun run check && wrangler deploy"
   }
 }

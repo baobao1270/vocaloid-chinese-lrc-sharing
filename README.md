@@ -37,7 +37,7 @@ _color:
 
 ## 部署
 
-`wrangler.jsonc` 已指向 `dist/` 静态资产目录和 `src/worker.ts`，不需要把 LRC 上传到 R2。
+`wrangler.jsonc` 已指向 `dist/` 静态资产目录和 `src/worker.ts`，不需要把 LRC 上传到 R2。未匹配任何文件的请求会以 404 状态码返回 `dist/404.html`（`assets.not_found_handling: "404-page"`）。
 
 首次部署前需要登录 Cloudflare：
 
@@ -55,4 +55,14 @@ bun run deploy
 
 1. `bun run build`：生成 `dist/`
 2. `bun run check`：校验目录、编码和 ZIP 生成
-3. `wrangler deploy`：发布 Cloudflare Worker 与静态资产
+3. `wrangler deploy`：发布 Cloudflare Worker 与静态资产（wrangler 版本由 `package.json` 锁定）
+
+## 云端构建（Workers Builds Git 集成）
+
+接入 Cloudflare 控制台的 GitHub 集成后，在 **Settings > Build** 中配置：
+
+- **Build command**：`bun install && bun run build && bun run check`
+- **Deploy command**：保持默认 `npx wrangler deploy`，wrangler 版本取自 `package.json`
+- **Branch control**：勾选 **Builds for non-production branches**，PR 分支会构建预览版本并在 PR 评论中给出 `*.workers.dev` 预览 URL
+
+构建变量只注入构建环境，不会进入 Worker 运行时。生产域名仍只有 `lrc.lty.vc`（`wrangler.jsonc` 中 `workers_dev: false` 且 `preview_urls: true`）。

@@ -18,6 +18,12 @@ const server = Bun.serve({
       return new Response(file);
     }
 
+    // 对齐 wrangler.jsonc 的 not_found_handling: "404-page"：未匹配路径返回 404 状态码与 404.html
+    const notFound = Bun.file("dist/404.html");
+    if (await notFound.exists()) {
+      return new Response(notFound, { status: 404, headers: { "content-type": "text/html; charset=utf-8" } });
+    }
+
     return new Response(Bun.file("dist/index.html"), { headers: { "content-type": "text/html; charset=utf-8" } });
   },
 });

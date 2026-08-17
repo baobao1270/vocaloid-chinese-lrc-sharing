@@ -141,8 +141,8 @@ function renderHome(search = "") {
   app.innerHTML = `
     <section class="hero hero-compact">
       <form class="search-form" role="search">
-        <label class="sr-only" for="album-search">搜索专辑、歌曲或署名</label>
-        <input id="album-search" name="q" value="${escapeHTML(search)}" placeholder="搜索专辑、歌曲或署名" autocomplete="off" />
+        <label class="sr-only" for="album-search">搜索专辑、歌曲或创作者</label>
+        <input id="album-search" name="q" value="${escapeHTML(search)}" placeholder="搜索专辑、歌曲或创作者" autocomplete="off" />
         <button class="search-submit" type="submit">搜索</button>
       </form>
       <div class="stat-line"><span>${catalog.albums.length} 张专辑</span><i></i><span>${trackCount} 份歌词</span></div>

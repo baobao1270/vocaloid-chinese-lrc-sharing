@@ -32,6 +32,8 @@ bun run deploy
 - `bun run dev`：本地预览 `dist/`
 - `bun run deploy`：依次执行 build、check、`wrangler deploy`
 
+构建需要 Bun 与 Python 3.12（仅构建期，用于生成/校验 GB18030 LRC）；Python 版本由仓库根目录 `.python-version` 声明，wrangler 作为 devDependency 锁定在 v4（npm 上尚无 v5）。
+
 部署前需确保已登录 Cloudflare：
 
 ```sh
@@ -111,6 +113,8 @@ _color:
 ## 前端维护约定
 
 - `site/index.html`：页面骨架、设置弹窗、页脚声明
+- `site/favicon.svg`、`site/favicon-32.png`、`site/apple-touch-icon.png`：站点图标（SVG 为源，PNG 由 sharp 从 SVG 生成；改设计需同步重新生成 PNG）
+- `site/404.html`：404 页面，由静态资产的 `not_found_handling: "404-page"` 以 404 状态码提供；资源引用使用根绝对路径（页面会在任意请求路径下被服务）
 - `site/app.js`：目录渲染、搜索、下载设置、ZIP 下载逻辑
 - `site/styles.css`：视觉样式，以天依蓝为主色
 - `site/zip.js`：无压缩 ZIP 生成逻辑
@@ -132,6 +136,7 @@ bun run build && bun run check
 
 - 提交/部署前确认 `dist/` 是最新构建产物。
 - `wrangler.jsonc` 中 `assets.directory` 应保持为 `./dist`。
+- `wrangler.jsonc` 保持 `workers_dev: false`（生产仅走自定义域名），`preview_urls: true` 仅用于 PR 预览 URL。
 - `src/worker.ts` 当前仅处理 `/health`，其他请求交给静态资产绑定。
 
 ## 依赖与类型

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#66ccff" />
+    <meta name="description" content="页面未找到 · VC歌词分享网" />
+    <meta name="robots" content="noindex" />
+    <title>页面未找到 · VC歌词分享网</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <style>
+      .not-found {
+        width: min(1180px, calc(100% - 2.5rem));
+        margin: 0 auto;
+        padding: clamp(4rem, 10vw, 8rem) 0 clamp(3rem, 8vw, 6rem);
+        text-align: center;
+      }
+      .not-found-code {
+        margin: 0;
+        color: var(--blue-deep);
+        font: 700 clamp(4.5rem, 14vw, 8rem) / 1 var(--serif, Georgia, serif);
+        letter-spacing: -0.05em;
+        text-shadow: 4px 4px 0 var(--blue);
+      }
+      .not-found h1 {
+        margin: 0.6rem 0 0;
+        font: 700 1.6rem var(--serif, Georgia, serif);
+        letter-spacing: -0.02em;
+      }
+      .not-found p:not(.not-found-code) {
+        margin: 0.7rem auto 1.8rem;
+        max-width: 30rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+      .not-found .primary-button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.9rem;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="返回 VC歌词分享网首页">
+        <span>
+          <strong>VC歌词分享网</strong>
+        </span>
+      </a>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <div class="not-found">
+        <p class="not-found-code" aria-hidden="true">404</p>
+        <h1>页面未找到</h1>
+        <p>你访问的链接可能已失效，或地址输入有误。歌词目录与下载功能都在首页。</p>
+        <a class="primary-button" href="/">返回首页</a>
+      </div>
+    </main>
+
+    <footer class="site-footer" aria-label="版权声明">
+      <p>
+        本站不提供专辑音频、视频及其他受版权保护内容的下载服务。本站提供的歌词文本著作权归原著作权人所有，请在购买相应专辑的授权副本后使用。若歌词另有特殊授权条款，以专辑页面显示的授权条款为准。
+      </p>
+      <p>
+        若您是著作权人，且认为本站提供的 LRC 文件侵犯了您的权益，请联系 <span id="dmca-email" data-user="vclrc-dmca" data-domain="lty.vc">邮件地址加载中</span>。本站网页代码属于公共领域。
+      </p>
+    </footer>
+
+    <script>
+      (() => {
+        const target = document.querySelector("#dmca-email");
+        if (!target) return;
+        const email = `${target.dataset.user}@${target.dataset.domain}`;
+        const anchor = document.createElement("a");
+        anchor.href = `mailto:${email}`;
+        anchor.textContent = email;
+        target.replaceChildren(anchor);
+      })();
+    </script>
+  </body>
+</html>

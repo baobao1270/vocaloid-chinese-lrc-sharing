@@ -219,7 +219,7 @@ async function build() {
   await mkdir(join(distRoot, "data"), { recursive: true });
   await Bun.write(
     join(distRoot, "data", "catalog.json"),
-    `${JSON.stringify({ generatedAt: new Date().toISOString(), albums }, null, 2)}\n`,
+    `${JSON.stringify({ generatedAt: new Date().toISOString(), albums })}\n`,
   );
 
   console.log(`Built ${albums.length} albums and ${totalTracks} tracks into dist/.`);

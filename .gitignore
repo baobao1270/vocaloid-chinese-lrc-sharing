@@ -1,4 +1,30 @@
-.DS_Store
-dist/
-.wrangler/
+# 依赖
 node_modules/
+
+# 构建产物
+dist/
+
+# Cloudflare wrangler
+.wrangler/
+.dev.vars
+
+# 本地环境变量
+.env
+.env.*
+!.env.example
+
+# Python（构建期运行 scripts/*.py）
+__pycache__/
+*.py[cod]
+
+# 日志
+*.log
+
+# 操作系统
+.DS_Store
+._*
+Thumbs.db
+
+# 编辑器
+.vscode/
+.idea/
