@@ -12,6 +12,8 @@ const app = document.querySelector("#app");
 const dialog = document.querySelector("#settings-dialog");
 const customTemplate = document.querySelector("#custom-template");
 const customTemplatePreview = document.querySelector("#custom-template-preview");
+const customTemplatePreviewName = document.querySelector("#custom-template-preview-name");
+const saveSettingsButton = document.querySelector("#settings-save");
 const settingsError = document.querySelector("#settings-error");
 let catalog;
 
@@ -66,10 +68,22 @@ function formatFileName(track) {
 
 function updateCustomTemplatePreview() {
   const template = customTemplate.value.trim();
-  customTemplatePreview.hidden = !template;
-  if (template) {
-    customTemplatePreview.textContent = `预览：${applyTemplate(template, PREVIEW_TRACK)}`;
-  }
+  customTemplatePreview.style.visibility = template ? "visible" : "hidden";
+  customTemplatePreviewName.textContent = template ? applyTemplate(template, PREVIEW_TRACK) : "";
+}
+
+function isCustomTemplateValid(value) {
+  const trimmed = value.trim();
+  return trimmed.includes("%track") || trimmed.includes("%title");
+}
+
+function updateSettingsValidity() {
+  const selected = document.querySelector('input[name="template"]:checked')?.value;
+  const isCustom = selected === "__custom__";
+  const valid = !isCustom || isCustomTemplateValid(customTemplate.value);
+  settingsError.textContent = "模板须至少包含 %track 或 %title。";
+  settingsError.hidden = valid;
+  saveSettingsButton.disabled = !valid;
 }
 
 function safeArchiveName(value) {
@@ -291,7 +305,7 @@ function showSettings() {
   document.querySelectorAll('input[name="settings-encoding"]').forEach((input) => {
     input.checked = input.value === getStoredEncoding();
   });
-  settingsError.hidden = true;
+  updateSettingsValidity();
   dialog.showModal();
 }
 
@@ -405,6 +419,13 @@ document.addEventListener("input", (event) => {
   if (event.target === customTemplate) {
     document.querySelector('input[name="template"][value="__custom__"]').checked = true;
     updateCustomTemplatePreview();
+    updateSettingsValidity();
+  }
+});
+
+document.addEventListener("change", (event) => {
+  if (event.target.matches('input[name="template"]')) {
+    updateSettingsValidity();
   }
 });
 
