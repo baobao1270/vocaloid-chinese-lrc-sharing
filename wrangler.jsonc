@@ -1,0 +1,25 @@
+{
+  "name": "vocaloid-chinese-lrc-sharing",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-08-12",
+  "workers_dev": false,
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "persist": true
+    }
+  },
+  "routes": [
+    {
+      "pattern": "lrc.lty.vc",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  }
+}

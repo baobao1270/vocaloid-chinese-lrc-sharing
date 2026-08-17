@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#66ccff" />
+    <meta name="description" content="以专辑为单位整理与下载中文 VOCALOID LRC 歌词文件。" />
+    <title>VC歌词分享网</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#app">跳到主要内容</a>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="返回 VC歌词分享网首页">
+        <span>
+          <strong>VC歌词分享网</strong>
+        </span>
+      </a>
+      <button class="settings-button header-settings" type="button" data-action="open-settings">下载设置</button>
+    </header>
+
+    <main id="app" tabindex="-1" aria-live="polite">
+      <div class="loading-state">正在整理专辑目录…</div>
+    </main>
+
+    <footer class="site-footer" aria-label="版权声明">
+      <p>
+        本站不提供专辑音频、视频及其他受版权保护内容的下载服务。本站提供的歌词文本著作权归原著作权人所有，请在购买相应专辑的授权副本后使用。若歌词另有特殊授权条款，以专辑页面显示的授权条款为准。
+      </p>
+      <p>
+        若您是著作权人，且认为本站提供的 LRC 文件侵犯了您的权益，请联系 <span id="dmca-email" data-user="vclrc-dmca" data-domain="lty.vc">邮件地址加载中</span>。本站网页代码属于公共领域。
+      </p>
+    </footer>
+
+    <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title">
+      <form method="dialog" class="settings-form">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">下载设置</p>
+            <h2 id="settings-title">下载设置</h2>
+          </div>
+          <button class="icon-button" type="button" data-action="close-settings" aria-label="关闭">×</button>
+        </div>
+        <p class="settings-intro">此设置仅保存在当前浏览器，用于下载编码、单曲文件名和 ZIP 内的文件名。</p>
+        <fieldset class="settings-section">
+          <legend>文件编码</legend>
+          <div class="segmented-options" role="radiogroup" aria-label="默认下载编码">
+            <label><input type="radio" name="settings-encoding" value="utf8" /><span>UTF-8</span></label>
+            <label><input type="radio" name="settings-encoding" value="gb18030" /><span>GB18030</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="settings-section">
+          <legend>命名格式</legend>
+          <label class="template-option">
+            <input type="radio" name="template" value="%track - %title" />
+            <span><code>%track - %title</code><small>例如：01 - 华满神都苑.lrc</small></span>
+          </label>
+          <label class="template-option">
+            <input type="radio" name="template" value="%track %title" />
+            <span><code>%track %title</code><small>例如：01 华满神都苑.lrc</small></span>
+          </label>
+          <label class="template-option">
+            <input type="radio" name="template" value="%title" />
+            <span><code>%title</code><small>例如：华满神都苑.lrc</small></span>
+          </label>
+          <label class="template-option template-custom">
+            <input type="radio" name="template" value="__custom__" />
+            <span>自定义</span>
+            <input id="custom-template" class="custom-template" type="text" maxlength="100" autocomplete="off" spellcheck="false" placeholder="例如：%track. %title" />
+          </label>
+          <small class="template-help">可用占位符：<code>%track</code>（音轨编号）、<code>%title</code>（歌曲名称）</small>
+        </fieldset>
+        <p id="settings-error" class="form-error" role="alert" hidden></p>
+        <div class="dialog-actions">
+          <button class="secondary-button" type="button" data-action="close-settings">取消</button>
+          <button class="primary-button" type="submit" data-action="save-settings">保存设置</button>
+        </div>
+      </form>
+    </dialog>
+
+    <noscript>VC歌词分享网需要启用 JavaScript，才能浏览目录及创建 ZIP 下载。</noscript>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
