@@ -56,20 +56,21 @@
           <legend>命名格式</legend>
           <label class="template-option">
             <input type="radio" name="template" value="%track - %title" />
-            <span><code>%track - %title</code><small>例如：01 - 华满神都苑.lrc</small></span>
+            <span><code>%track - %title</code><small class="template-preview">预览：08 - 唱给雅音宫羽.lrc</small></span>
           </label>
           <label class="template-option">
             <input type="radio" name="template" value="%track %title" />
-            <span><code>%track %title</code><small>例如：01 华满神都苑.lrc</small></span>
+            <span><code>%track %title</code><small class="template-preview">预览：08 唱给雅音宫羽.lrc</small></span>
           </label>
           <label class="template-option">
             <input type="radio" name="template" value="%title" />
-            <span><code>%title</code><small>例如：华满神都苑.lrc</small></span>
+            <span><code>%title</code><small class="template-preview">预览：唱给雅音宫羽.lrc</small></span>
           </label>
           <label class="template-option template-custom">
             <input type="radio" name="template" value="__custom__" />
             <span>自定义</span>
-            <input id="custom-template" class="custom-template" type="text" maxlength="100" autocomplete="off" spellcheck="false" placeholder="例如：%track. %title" />
+            <input id="custom-template" class="custom-template" type="text" maxlength="100" autocomplete="off" spellcheck="false" placeholder="%track. %title" />
+            <small id="custom-template-preview" class="template-preview" hidden>预览：08. 唱给雅音宫羽.lrc</small>
           </label>
           <small class="template-help">可用占位符：<code>%track</code>（音轨编号）、<code>%title</code>（歌曲名称）</small>
         </fieldset>

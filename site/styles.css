@@ -285,8 +285,10 @@ code { padding: .08rem .25rem; border-radius: .18rem; color: #0b668f; background
 .template-option span { display: grid; gap: .17rem; min-width: 0; font-size: .86rem; }
 .template-option code { display: inline-block; width: fit-content; max-width: 100%; }
 .template-option small, .template-help { color: var(--muted); font-size: .72rem; }
-.template-custom { align-items: center; flex-wrap: wrap; }
-.custom-template { flex: 1 1 15rem; min-width: 0; padding: .6rem .7rem; border: 1px solid var(--line); border-radius: .22rem; outline: none; background: white; font-size: .84rem; }
+.template-preview { width: fit-content; max-width: 100%; padding: .05rem .4rem; border-radius: .2rem; color: var(--blue-deep); background: var(--cyan-soft); font-style: italic; font-weight: 650; overflow-wrap: anywhere; }
+.template-custom { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: center; }
+.custom-template { min-width: 0; padding: .6rem .7rem; border: 1px solid var(--line); border-radius: .22rem; outline: none; background: white; font-size: .84rem; }
+.custom-template-preview { grid-column: 3; }
 .custom-template:focus { border-color: var(--blue-deep); box-shadow: 0 0 0 3px rgba(102, 204, 255, .2); }
 .form-error { margin: .8rem 0 0; color: #c62828; font-size: .8rem; font-weight: 650; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: .65rem; margin-top: 1.35rem; }

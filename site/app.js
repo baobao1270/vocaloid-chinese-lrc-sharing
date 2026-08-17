@@ -6,10 +6,12 @@ const DEFAULT_TEMPLATE = "%track - %title";
 const DEFAULT_ENCODING = "utf8";
 const KNOWN_TEMPLATES = new Set(["%track - %title", "%track %title", "%title"]);
 const KNOWN_ENCODINGS = new Set(["utf8", "gb18030"]);
+const PREVIEW_TRACK = { track: "08", title: "唱给雅音宫羽" };
 
 const app = document.querySelector("#app");
 const dialog = document.querySelector("#settings-dialog");
 const customTemplate = document.querySelector("#custom-template");
+const customTemplatePreview = document.querySelector("#custom-template-preview");
 const settingsError = document.querySelector("#settings-error");
 let catalog;
 
@@ -47,8 +49,7 @@ function labelForEncoding(encoding) {
   return encoding === "gb18030" ? "GB18030" : "UTF-8";
 }
 
-function formatFileName(track) {
-  const template = getTemplate();
+function applyTemplate(template, track) {
   const fileName = template
     .replaceAll("%track", track.track)
     .replaceAll("%title", track.title)
@@ -57,6 +58,18 @@ function formatFileName(track) {
     .trim();
 
   return `${fileName || `${track.track} ${track.title}`}.lrc`;
+}
+
+function formatFileName(track) {
+  return applyTemplate(getTemplate(), track);
+}
+
+function updateCustomTemplatePreview() {
+  const template = customTemplate.value.trim();
+  customTemplatePreview.hidden = !template;
+  if (template) {
+    customTemplatePreview.textContent = `预览：${applyTemplate(template, PREVIEW_TRACK)}`;
+  }
 }
 
 function safeArchiveName(value) {
@@ -274,6 +287,7 @@ function showSettings() {
     input.checked = input.value === selected;
   });
   customTemplate.value = selected === "__custom__" ? current : "";
+  updateCustomTemplatePreview();
   document.querySelectorAll('input[name="settings-encoding"]').forEach((input) => {
     input.checked = input.value === getStoredEncoding();
   });
@@ -390,6 +404,7 @@ document.addEventListener("input", (event) => {
   }
   if (event.target === customTemplate) {
     document.querySelector('input[name="template"][value="__custom__"]').checked = true;
+    updateCustomTemplatePreview();
   }
 });
 
