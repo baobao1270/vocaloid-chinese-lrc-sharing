@@ -60,7 +60,7 @@ function sha256Hex(data: ArrayBuffer) {
   return createHash("sha256").update(new Uint8Array(data)).digest("hex");
 }
 
-function parseLrc(text: string, fileName: string, fileOrder: number): Omit<Track, "path"> {
+export function parseLrc(text: string, fileName: string, fileOrder: number): Omit<Track, "path"> {
   const metadata = new Map<string, string>();
   const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/);
   const timedLine = /^(?:\[[0-9]{1,3}:[0-5][0-9](?:[.:][0-9]{1,3})?])+\s*(.*)$/;
@@ -81,9 +81,11 @@ function parseLrc(text: string, fileName: string, fileOrder: number): Omit<Track
 
     const content = timestamp[1].trim();
     if (!content) {
-      beforeLyrics = false;
-    } else {
+      if (staff.length) beforeLyrics = false;
+    } else if (/^[^:：]+[:：]\s*\S/.test(content)) {
       staff.push(parseStaffLine(content));
+    } else {
+      beforeLyrics = false;
     }
   }
 
@@ -239,4 +241,4 @@ async function build() {
   console.log(`Built ${albums.length} albums and ${totalTracks} tracks into dist/.`);
 }
 
-await build();
+if (import.meta.main) await build();
